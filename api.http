@@ -1,0 +1,84 @@
+@serverUrl = https://student-json-api.lidemy.me
+
+
+### 留言板 ###
+POST {{serverUrl}}/comments
+content-type: application/json
+
+{
+    "nickname": "hello",
+    "body": "comment content"
+}
+
+### 驗證身分 ###
+{{serverUrl}}/me
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RuIiwidXNlcklkIjoiMGY2M2I3NWMwMmZhMTkiLCJpYXQiOjE2NjA1Njc0NzR9.P-pBiIEm7MQAtrTP-tVJ1Kt9CB02ruiOqPzKcsa28mE
+
+{}
+
+### 發文 ###
+
+POST {{serverUrl}}/posts
+content-type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RuIiwidXNlcklkIjoiMGY2M2I3NWMwMmZhMTkiLCJpYXQiOjE2NjAwNTg3NjV9.StGLY-bUIgXJlVAB5bGVQxOHQwojR-j06TII1rgsuGw
+
+{
+  "title": "twset",
+  "body": "xtjhtxrj",
+  "cmid":"1"
+}
+
+
+
+### 刪除 ###
+
+DELETE {{serverUrl}}/posts/642
+content-type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RuIiwidXNlcklkIjoiMGY2M2I3NWMwMmZhMTkiLCJpYXQiOjE2NjAwNTg3NjV9.StGLY-bUIgXJlVAB5bGVQxOHQwojR-j06TII1rgsuGw
+
+{
+  "title": "twset!!!!!!",
+  "body": "xtjhtxrjAAAAAAAAAAAAAA"
+}
+
+
+
+### 修改 ###
+
+PUT {{serverUrl}}/posts/643
+content-type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RuIiwidXNlcklkIjoiMGY2M2I3NWMwMmZhMTkiLCJpYXQiOjE2NjA1NzE4Mjd9.e0uuP3rETsRyQIbDgr-VYNnvoQJSV89tA0yKCcLuA5o
+
+{
+    "userId": "0f63b75c02fa19",
+    "nickname": "testn",
+    "title": "sdf",
+    "body": "sdf",
+    "comments": [
+        {
+            "cmid": 0,
+            "cmnickname": "testn",
+            "cmmsg": "zxv",
+            "cmAt": "1660576104622"
+        }
+    ],
+    "createdAt": 1660575708078
+}
+
+
+############
+DELETE {{serverUrl}}/posts/644
+content-type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RuIiwidXNlcklkIjoiMGY2M2I3NWMwMmZhMTkiLCJpYXQiOjE2NjA2Mjg2MTB9.L-iVdhlyj_tBovNpm5ANmPJMvx-ooyRbQrryCRk4P_4
+
+{
+"comments": [
+        {
+            "cmid": 0,
+        "cmuserid": "0f63b75c02fa19",
+        "cmnickname": "testn",
+        "cmmsg": "",
+        "cmAt": "1660629147586"
+        }
+    ],
+}
