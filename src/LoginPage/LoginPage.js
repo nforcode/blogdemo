@@ -8,7 +8,7 @@ const LoginForm = styled.form`
   padding: 0 15px;
   width: 840px;
   height: 100%;
-  margin: 0;
+  margin: 0 auto;
   color: black;
 
   @media screen and (max-width: 767px) {

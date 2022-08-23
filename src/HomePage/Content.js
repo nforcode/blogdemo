@@ -89,11 +89,14 @@ const EdDate = styled.span`
   display: inline-block;
   font-size: 14px;
   color: grey;
+  margin-left: 20px;
 `;
 const EditButton = styled.button`
   position: absolute;
   bottom: -46px;
-  left: 0;
+  left: 20px;
+  border: none;
+  border-radius: 10px;
 `;
 //Form
 const ResponseForm = styled.form`
@@ -109,6 +112,7 @@ const ResMsg = styled.textarea`
   width: 99%;
   margin: 35px auto;
   resize: none;
+  outline: medium;
   @media screen and (max-width: 767px) {
     margin-left: 20px;
     width: 90%;
@@ -118,6 +122,8 @@ const ResButton = styled.button`
   position: absolute;
   right: 0px;
   bottom: 0px;
+  border: none;
+  border-radius: 10px;
   @media screen and (max-width: 767px) {
     right: 20px;
   }
@@ -173,6 +179,8 @@ const DelButton = styled.button`
   position: absolute;
   right: 0px;
   bottom: 5px;
+  border: none;
+  border-radius: 10px;
 `;
 
 function ArticleRes({ user, comment, post, handleDelete }) {

@@ -9,7 +9,7 @@ const RegForm = styled.form`
   width: 840px;
   height: 100%;
   color: black;
-
+  margin: 0 auto;
   @media screen and (max-width: 767px) {
     width: auto;
   }

@@ -5,103 +5,81 @@ import { useNavigate } from "react-router-dom";
 import { editPost, myPost } from "../WebApi";
 import { AuthContext } from "../contexts";
 const EditContainer = styled.form`
-  min-height: 100vh;
-  background: black;
-  color: white;
-  padding: 2rem;
+  padding: 0 15px;
+  width: 840px;
+  height: 100%;
+  margin: 0 auto;
+  color: black;
   @media screen and (max-width: 767px) {
-    margin-top: 50px;
-    padding: 2rem 0;
-    background: gray;
+    width: auto;
   }
 `;
 
 const EditWrap = styled.div`
-  min-height: 100vh;
-  padding: 0 5rem;
-  letter-spacing: 0.2rem;
-  border: 1rem solid rgba(255, 255, 255, 0.3);
+  margin: 40px auto;
+  position: relative;
+  min-height: 60vh;
+  width: 692px;
+  border: 1px solid grey;
   @media screen and (max-width: 767px) {
-    margin: 0 2rem;
-    padding: 0;
-    background: white;
-    color: black;
+    width: auto;
+    max-width: 600px;
   }
+`;
+const Title = styled.span`
+  display: block;
+  margin-top: 40px;
+  margin-left: 20px;
 `;
 
 const EditTitle = styled.input`
   display: block;
-  margin: 5rem auto;
-  margin-bottom: 5px;
-  width: 278px;
+  position: absolute;
+  top: 40px;
+  left: 85px;
+  width: 69%;
+  font-size: 1rem;
+  outline: medium;
   @media screen and (max-width: 767px) {
-    margin: 2rem;
-    width: 80%;
-    height: 2rem;
-    font-size: 2rem;
-  }
-`;
-const EditAuthor = styled.div`
-  display: inline;
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  @media screen and (max-width: 767px) {
-    display: block;
-    margin-left: 2rem;
   }
 `;
 
-const EditDate = styled.div`
-  display: inline;
-  @media screen and (max-width: 767px) {
-    display: block;
-    margin-top: 1rem;
-  }
-`;
-const Divider = styled.div`
-  border-top: 0.2rem solid rgba(255, 255, 255, 0.3);
-  margin: 2rem 0;
-  @media screen and (max-width: 767px) {
-    margin-right: 2rem;
-    border-top: 0.2rem solid gray;
-  }
+const Body = styled.span`
+  display: block;
+  margin-top: 40px;
+  margin-left: 20px;
 `;
 const EditBody = styled.textarea`
   display: block;
-  margin: 0 auto;
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 93%;
+  font-size: 1.2rem;
+  line-height: 1.8rem;
+  word-wrap: break-word;
   resize: none;
-  width: 280px;
+  outline: medium;
   @media screen and (max-width: 767px) {
-    margin: 2rem;
-    width: 80%;
-    font-size: 2rem;
+    width: 88%;
   }
 `;
 const SubmitButton = styled.button`
   display: block;
-  width: 3rem;
-  margin: 1rem auto;
-  @media screen and (max-width: 767px) {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    width: 4rem;
-    height: 15%;
-    font-size: 1.5rem;
-    border-radius: 1rem;
-  }
+  width: 60px;
+  margin: 40px auto;
+  height: 15%;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 10px;
 `;
 const CancelButton = styled.button`
   display: block;
-  width: 3rem;
-  margin: 1rem auto;
-  @media screen and (max-width: 767px) {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    width: 4rem;
-    height: 15%;
-    font-size: 1.5rem;
-    border-radius: 1rem;
-  }
+  width: 60px;
+  margin: 40px auto;
+  height: 15%;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 10px;
 `;
 const EditFooter = styled.div`
   display: flex;
@@ -150,20 +128,15 @@ export default function EditPage() {
     <EditContainer onSubmit={handleEdit}>
       {post && (
         <EditWrap>
+          <Title>標題：</Title>
           <EditTitle
-            type="text"
             placeholder="請輸入標題(20字內)"
             maxLength="20"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           ></EditTitle>
-          <EditAuthor>
-            作者：{user.nickname && user.nickname ? user.nickname : "匿名"}
-            <EditDate>
-              {new Date(Number(post.createdAt)).toLocaleString()}
-            </EditDate>
-            <Divider></Divider>
-          </EditAuthor>
+
+          <Body>內文：</Body>
           <EditBody
             rows={10}
             placeholder="請輸入內文(500字內)"

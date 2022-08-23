@@ -8,7 +8,7 @@ import Content from "./HomePage/Content";
 import NewPage from "./NewPage/NewPage";
 import MyPage from "./MyPage/MyPage";
 import RegPage from "./RegPage/RegPage";
-import EditPage from "./MyPage/EditPage";
+import EditPage from "./NewPage/EditPage";
 import { AuthContext } from "./contexts";
 
 //components
