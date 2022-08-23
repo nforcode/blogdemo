@@ -5,41 +5,54 @@ import { AuthContext } from "../contexts";
 import { setAuthToken, getAuthToken } from "../utils";
 import { getMe } from "../WebApi";
 const Container = styled.div`
-  display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 60px;
   position: fixed;
-  background-color: white;
+  background-color: black;
+  color: White;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1;
-  @media screen and (max-width: 992px) {
-    height: 40px;
+  @media screen and (max-width: 767px) {
+    height: 50px;
+  }
+`;
+const Wrap = styled.div`
+  width: 840px;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+  @media screen and (max-width: 767px) {
+    width: auto;
   }
 `;
 const Logo = styled.h1`
-  color: green;
-  margin-left: 15px;
-  font-size: 2.5rem;
-  font-family: fantasy;
-  text-decoration: none;
-  @media screen and (max-width: 992px) {
-    display: none;
-  }
-`;
-const MLogo = styled.h1`
-  color: green;
+  display: inline;
+  color: #0080ff;
   margin-left: 15px;
   font-size: 2.5rem;
   font-family: fantasy;
   text-decoration: none;
   position: absolute;
   top: 10px;
-  @media screen and (min-width: 993px) {
+  @media screen and (max-width: 767px) {
     display: none;
+  }
+`;
+const MLogo = styled.h1`
+  display: none;
+  @media screen and (max-width: 767px) {
+    display: inline;
+    color: #0080ff;
+    margin-left: 15px;
+    font-size: 2.5rem;
+    font-family: fantasy;
+    text-decoration: none;
+    position: absolute;
+    top: 5px;
   }
 `;
 const NavBarList = styled.div`
@@ -48,10 +61,10 @@ const NavBarList = styled.div`
   font-size: 1rem;
   position: absolute;
   top: 12px;
-  right: 10px;
-  @media screen and (max-width: 992px) {
+  right: -15px;
+  @media screen and (max-width: 767px) {
     font-size: 1.2rem;
-    top: 10px;
+    top: 5px;
   }
 `;
 const NavIndex = styled(Link)`
@@ -59,10 +72,11 @@ const NavIndex = styled(Link)`
   margin-right: 15px;
   box-sizing: border-box;
   cursor: pointer;
-  color: black;
+  color: white;
   text-decoration: none;
-  ${(props) => props.$active && `background:rgba(0,0,0,0.1);`}
-  @media screen and (max-width: 992px) {
+  ${(props) =>
+    props.$active && `background:rgba(255,255,255,0.3); border-radius:10px;`}
+  @media screen and (max-width: 767px) {
     display: none;
   }
 `;
@@ -71,12 +85,14 @@ const Nav = styled(Link)`
   margin-right: 15px;
   box-sizing: border-box;
   cursor: pointer;
-  color: black;
+  color: white;
   text-decoration: none;
-  ${(props) => props.$active && `background:rgba(0,0,0,0.1);`}
+  ${(props) =>
+    props.$active && `background:rgba(255,255,255,0.3); border-radius:10px;`}
 `;
 const Post = styled(Link)`
-  background-color: orange;
+  background-color: #64a600;
+  margin-right: 30px;
   padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
@@ -88,7 +104,7 @@ const Logout = styled.div`
   margin-right: 15px;
   box-sizing: border-box;
   cursor: pointer;
-  color: black;
+  color: white;
   text-decoration: none;
 `;
 export default function NavBar() {
@@ -119,39 +135,44 @@ export default function NavBar() {
   };
   return (
     <Container>
-      <Logo as={Link} to="/">
-        NBLog
-      </Logo>
-      <MLogo as={Link} to="/">
-        N
-      </MLogo>
-      <NavBarList>
-        <NavIndex to="/" $active={location.pathname === "/"}>
-          首頁
-        </NavIndex>
-        {user && (
-          <Nav to="/my" $active={location.pathname === "/my"}>
-            我的文章
-          </Nav>
-        )}
-        {!user && displaylogin && (
-          <Nav to="/login" $active={location.pathname === "/login"}>
-            登入
-          </Nav>
-        )}
-        {!user && displaylogin && (
-          <Nav to="/reg" $active={location.pathname === "/reg"}>
-            註冊
-          </Nav>
-        )}
-        {user && <Logout onClick={handleLogout}>登出</Logout>}
+      <Wrap>
+        <Logo as={Link} to="/">
+          NBLog
+        </Logo>
+        <MLogo as={Link} to="/">
+          N
+        </MLogo>
+        <NavBarList>
+          <NavIndex to="/" $active={location.pathname === "/"}>
+            首頁
+          </NavIndex>
+          {user && (
+            <Nav
+              to={`/user/${user.id}`}
+              $active={location.pathname === `/user/${user.id}`}
+            >
+              我的文章
+            </Nav>
+          )}
+          {!user && displaylogin && (
+            <Nav to="/login" $active={location.pathname === "/login"}>
+              登入
+            </Nav>
+          )}
+          {!user && displaylogin && (
+            <Nav to="/reg" $active={location.pathname === "/reg"}>
+              註冊
+            </Nav>
+          )}
+          {user && <Logout onClick={handleLogout}>登出</Logout>}
 
-        {user && (
-          <Post to="/new" $active={location.pathname === "/new"}>
-            發文
-          </Post>
-        )}
-      </NavBarList>
+          {user && (
+            <Post to="/new" $active={location.pathname === "/new"}>
+              發文
+            </Post>
+          )}
+        </NavBarList>
+      </Wrap>
     </Container>
   );
 }

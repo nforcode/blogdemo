@@ -5,39 +5,42 @@ import { login, getMe } from "../WebApi";
 import { setAuthToken } from "../utils";
 import { AuthContext } from "../contexts";
 const LoginForm = styled.form`
-  padding: 10px;
-  min-height: 100vh;
-  background: rgba(0, 0, 50);
-  color: white;
-  /* lg */
-  @media screen and (max-width: 992px) {
-    margin-top: 50px;
+  padding: 0 15px;
+  width: 840px;
+  height: 100%;
+  margin: 0;
+  color: black;
+
+  @media screen and (max-width: 767px) {
+    width: auto;
   }
 `;
 const LoginWrap = styled.div`
-  background: rgba(30, 80, 20, 0.5);
   width: 250px;
   height: 250px;
-  margin: 2rem auto;
+  margin: 50px auto;
   display: flex;
   flex-direction: column;
-  border: 1px solid white;
+  border: 1px solid grey;
   text-align: center;
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 767px) {
     width: 80%;
     height: 80%;
     font-size: 2rem;
   }
 `;
 const LoginUsername = styled.div`
-  margin-top: 1rem;
+  margin-top: 20px;
 `;
 
 const LoginPassword = styled.div`
-  margin-top: 1rem;
+  margin-top: 20px;
 `;
 const Input = styled.input`
-  @media screen and (max-width: 992px) {
+  border: none;
+  outline: medium;
+  border-bottom: 1px solid gray;
+  @media screen and (max-width: 767px) {
     margin: 2rem;
     width: 80%;
     height: 2rem;
@@ -47,13 +50,14 @@ const Input = styled.input`
 const LoginButton = styled.button`
   width: 3rem;
   margin: 1rem auto;
-  @media screen and (max-width: 992px) {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+  border: none;
+  border-radius: 10px;
+  @media screen and (max-width: 767px) {
+    margin-top: 20px;
+    margin-bottom: 20px;
     width: 50%;
     height: 15%;
     font-size: 1.5rem;
-    border-radius: 1rem;
   }
 `;
 const Errormsg = styled.div`
@@ -62,7 +66,7 @@ const Errormsg = styled.div`
 
 export default function LoginPage() {
   const [username, setUsername] = useState("testn");
-  const [password, setPassword] = useState("Lidemy");
+  const [password, setPassword] = useState("blogdemo");
   const [errorMessage, setErrorMessage] = useState("");
   const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -71,6 +75,7 @@ export default function LoginPage() {
     window.scrollTo(0, 0);
   });
   const handleSubmit = (e) => {
+    e.preventDefault();
     setErrorMessage(null);
     login(username, password).then((data) => {
       if (data.ok === 0) {
@@ -84,7 +89,7 @@ export default function LoginPage() {
           return setErrorMessage(response.toString());
         }
         setUser(response.data);
-        navigate(-1);
+        navigate("/");
       });
     });
   };
@@ -94,6 +99,8 @@ export default function LoginPage() {
         <LoginUsername>
           username:{" "}
           <Input
+            placeholder="請輸入帳號"
+            maxLength="10"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -101,6 +108,8 @@ export default function LoginPage() {
         <LoginPassword>
           password:{" "}
           <Input
+            placeholder="請輸入密碼"
+            maxLength="10"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

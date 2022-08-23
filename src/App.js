@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { HashRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginPage from "./LoginPage/LoginPage";
 import HomePage from "./HomePage/HomePage";
 import NavBar from "./NavBar/NavBar";
@@ -22,11 +22,11 @@ function App() {
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <Root>
-        <Router>
+        <Router basename="blogdemo/">
           <NavBar />
           <Routes>
             <Route exact path="/" element={<HomePage />} />
-            <Route path="my" element={<MyPage />} />
+            <Route path="user/:id" element={<MyPage />} />
             <Route path="posts/:id" element={<EditPage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="reg" element={<RegPage />} />

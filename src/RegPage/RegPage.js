@@ -5,57 +5,60 @@ import { reg, getMe } from "../WebApi";
 import { setAuthToken } from "../utils";
 import { AuthContext } from "../contexts";
 const RegForm = styled.form`
-  padding: 10px;
-  min-height: 100vh;
-  background: rgba(0, 0, 50);
-  color: white;
-  @media screen and (max-width: 992px) {
-    margin-top: 60px;
+  padding: 0 15px;
+  width: 840px;
+  height: 100%;
+  color: black;
+
+  @media screen and (max-width: 767px) {
+    width: auto;
   }
 `;
 const RegWrap = styled.div`
-  background: rgba(30, 80, 20, 0.5);
   width: 250px;
   height: 250px;
-  margin: 2rem auto;
+  margin: 50px auto;
   display: flex;
   flex-direction: column;
-  border: 1px solid white;
   text-align: center;
-  @media screen and (max-width: 992px) {
-    margin-top: 50px;
+  border: 1px solid grey;
+  @media screen and (max-width: 767px) {
+    margin: 20px auto;
     width: 80%;
     height: 80%;
     font-size: 2rem;
   }
 `;
 const RegUsername = styled.div`
-  margin-top: 1rem;
+  margin-top: 20px;
 `;
 const RegNickname = styled.div`
-  margin-top: 1rem;
+  margin-top: 20px;
 `;
 const RegPassword = styled.div`
-  margin-top: 1rem;
+  margin-top: 20px;
 `;
 const Input = styled.input`
-  @media screen and (max-width: 992px) {
-    margin: 2rem;
+  border: none;
+  outline: medium;
+  border-bottom: 1px solid gray;
+  @media screen and (max-width: 767px) {
+    margin: 20px;
     width: 80%;
-    height: 2rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 `;
 const RegButton = styled.button`
-  width: 3rem;
-  margin: 1rem auto;
-  @media screen and (max-width: 992px) {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+  width: 60px;
+  margin: 20px auto;
+  border: none;
+  border-radius: 10px;
+  @media screen and (max-width: 767px) {
+    margin-top: 20px;
+    margin-bottom: 20px;
     width: 50%;
     height: 15%;
     font-size: 1.5rem;
-    border-radius: 1rem;
   }
 `;
 const Errormsg = styled.div`
@@ -63,7 +66,7 @@ const Errormsg = styled.div`
 `;
 export default function RegPage() {
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("Lidemy");
+  const [password, setPassword] = useState("blogdemo");
   const [nickname, setNickname] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const { setUser } = useContext(AuthContext);
@@ -74,6 +77,7 @@ export default function RegPage() {
   });
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     setErrorMessage(null);
     reg(username, password, nickname).then((data) => {
       if (data.ok === 0) {
@@ -99,6 +103,8 @@ export default function RegPage() {
         <RegUsername>
           username:{" "}
           <Input
+            placeholder="請輸入帳號(10字以內)"
+            maxLength="10"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -106,6 +112,8 @@ export default function RegPage() {
         <RegNickname>
           nickname:{" "}
           <Input
+            placeholder="請輸入暱稱(10字以內)"
+            maxLength="10"
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
           />
@@ -113,6 +121,8 @@ export default function RegPage() {
         <RegPassword>
           password:{" "}
           <Input
+            placeholder="請輸入密碼(10字以內)"
+            maxLength="10"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

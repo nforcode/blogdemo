@@ -3,181 +3,193 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { AuthContext } from "../contexts";
 import { setAuthToken, getAuthToken } from "../utils";
-import { getAPost, getMe } from "../WebApi";
-import { useNavigate } from "react-router-dom";
+import { getPost, getMe } from "../WebApi";
+import { useNavigate, Link } from "react-router-dom";
 const CtContainer = styled.div`
-  min-height: 100vh;
-  background: black;
-  color: white;
-  padding: 2rem;
-
-  @media screen and (max-width: 992px) {
-    margin-top: 50px;
-    padding: 2rem 0;
-    background: gray;
+  padding: 0 15px;
+  width: 840px;
+  height: 100%;
+  margin: 0 auto;
+  color: black;
+  @media screen and (max-width: 767px) {
+    width: auto;
   }
 `;
 const CtWrap = styled.div`
-  padding: 0 5rem;
-  letter-spacing: 0.2rem;
-  border: 1rem solid rgba(255, 255, 255, 0.3);
+  margin: 40px auto;
   position: relative;
-  @media screen and (max-width: 992px) {
-    margin: 0 2rem;
-    padding: 0;
-    background: white;
-    color: black;
+  min-height: 60vh;
+  width: 692px;
+  @media screen and (max-width: 767px) {
+    width: auto;
+    max-width: 600px;
   }
 `;
+
+const ArthurLink = styled(Link)``;
+const Avatar = styled.img`
+  height: 48px;
+  width: 48px;
+  position: absolute;
+  border-radius: 48px;
+  @media screen and (max-width: 767px) {
+    left: 15px;
+  }
+`;
+const CtAuthor = styled(Link)`
+  display: inline-block;
+  margin-left: 60px;
+  max-width: 200px;
+  text-decoration: none;
+  color: black;
+  position: absolute;
+  @media screen and (max-width: 767px) {
+    left: 15px;
+  }
+`;
+
+const CtDate = styled.span`
+  display: inline-block;
+  position: absolute;
+  top: 30px;
+  left: 60px;
+  font-size: 14px;
+  color: grey;
+
+  @media screen and (max-width: 767px) {
+    left: 75px;
+  }
+`;
+
 const CtTitle = styled.div`
-  padding-top: 5rem;
-  font-size: 2rem;
+  padding-top: 80px;
+  font-size: 40px;
   line-height: 3rem;
 
-  @media screen and (max-width: 992px) {
-    margin-left: 2rem;
+  @media screen and (max-width: 767px) {
+    margin: 0 15px;
   }
 `;
-const CtAuthor = styled.div`
-  display: inline;
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  @media screen and (max-width: 992px) {
-    display: block;
-    margin-left: 2rem;
-  }
-`;
-const Blank = styled.p`
-  display: inline;
-  @media screen and (max-width: 992px) {
-    display: none;
-  }
-`;
-const CtDate = styled.div`
-  display: inline;
-  @media screen and (max-width: 992px) {
-    display: block;
-    margin-top: 1rem;
-  }
-`;
-const Divider = styled.div`
-  border-top: 0.2rem solid rgba(255, 255, 255, 0.3);
-  margin: 2rem 0;
-  @media screen and (max-width: 992px) {
-    margin-right: 2rem;
-    border-top: 0.2rem solid gray;
-  }
+const Pic = styled.img`
+  display: block;
+  margin: 30px 15px;
+  width: 92%;
 `;
 const CtBody = styled.div`
-  margin: 5rem 0;
-  margin-right: -1rem;
-  padding-bottom: 5rem;
+  margin: 90px 0;
   font-size: 1.2rem;
   line-height: 1.8rem;
   word-wrap: break-word;
-  @media screen and (max-width: 992px) {
-    margin-left: 2rem;
-    margin-right: 1rem;
+  @media screen and (max-width: 767px) {
+    margin: 60px 15px;
   }
 `;
 
-const EdDate = styled.div`
-  display: inline;
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  @media screen and (max-width: 992px) {
-    display: block;
-    margin-left: 2rem;
-  }
+const EdDate = styled.span`
+  display: inline-block;
+  font-size: 14px;
+  color: grey;
 `;
-//Form-start
+const EditButton = styled.button`
+  position: absolute;
+  bottom: -46px;
+  left: 0;
+`;
+//Form
 const ResponseForm = styled.form`
-  display: flex;
+  margin: 40px auto;
   position: relative;
-  margin: 0 2rem;
-  @media screen and (max-width: 992px) {
-    background: white;
-    color: black;
+  width: 692px;
+  @media screen and (max-width: 767px) {
+    width: auto;
+    max-width: 600px;
   }
 `;
 const ResMsg = styled.textarea`
-  width: 95%;
+  width: 99%;
   margin: 35px auto;
-
-  @media screen and (max-width: 992px) {
-    margin: 0 auto;
-    margin-bottom: 35px;
+  resize: none;
+  @media screen and (max-width: 767px) {
+    margin-left: 20px;
+    width: 90%;
   }
 `;
 const ResButton = styled.button`
   position: absolute;
-  right: 10px;
-  bottom: 5px;
+  right: 0px;
+  bottom: 0px;
+  @media screen and (max-width: 767px) {
+    right: 20px;
+  }
 `;
 const Resnologin = styled.div`
   position: absolute;
   right: 10px;
   bottom: 5px;
 `;
-//Form-end
+//Reply
 const ArticleContainer = styled.div`
-  margin: 2rem;
+  margin: 20px;
 `;
 
 const ResWrap = styled.div`
+  margin: 10px auto;
   position: relative;
-  @media screen and (max-width: 992px) {
-    border: 1px solid white;
-    background: black;
+  width: 692px;
+  border-bottom: 1px solid gray;
+  @media screen and (max-width: 767px) {
+    width: auto;
+    max-width: 600px;
+  }
+`;
+const ResAvatar = styled.img`
+  height: 32px;
+  width: 32px;
+  position: absolute;
+  border-radius: 48px;
+  @media screen and (max-width: 767px) {
   }
 `;
 const ResAuthor = styled.div`
-  display: inline;
-  margin-top: 1rem;
+  margin-left: 36px;
   font-size: 0.9rem;
-  @media screen and (max-width: 992px) {
-    display: block;
-    margin-left: 2rem;
+  @media screen and (max-width: 767px) {
   }
 `;
 const ResDate = styled.div`
-  display: inline;
-  @media screen and (max-width: 992px) {
-    display: block;
-    margin-top: 1rem;
-  }
+  position: absolute;
+  top: 15px;
 `;
 const ResBody = styled.div`
-  margin-right: -1rem;
-  padding-bottom: 5rem;
+  margin: 30px 0;
+
   font-size: 1.2rem;
   line-height: 1.8rem;
   word-wrap: break-word;
-  @media screen and (max-width: 992px) {
-    margin-left: 2rem;
-    margin-right: 1rem;
+  @media screen and (max-width: 767px) {
   }
+`;
+const DelButton = styled.button`
+  position: absolute;
+  right: 0px;
+  bottom: 5px;
 `;
 
 function ArticleRes({ user, comment, post, handleDelete }) {
   return (
     <ResWrap>
+      <ResAvatar src={`https://i.pravatar.cc/32?img=${comment.cmid}`} />
       <ResAuthor>
-        作者：
         {comment.cmnickname && comment.cmnickname ? comment.cmnickname : "匿名"}
-        <ResDate>
-          <Blank>{" | "}</Blank>
-          {new Date(Number(comment.cmAt)).toLocaleString()}
-        </ResDate>
-        <Divider></Divider>
+        <ResDate>{new Date(Number(comment.cmAt)).toLocaleString()}</ResDate>
       </ResAuthor>
       <ResBody>{comment.cmmsg}</ResBody>
       {comment &&
       user &&
       (user.id === comment.cmuserid || user.id === post.userId) ? (
-        <ResButton onClick={(e) => handleDelete(e, comment.cmid)}>
+        <DelButton onClick={(e) => handleDelete(e, comment.cmid)}>
           刪除
-        </ResButton>
+        </DelButton>
       ) : (
         <></>
       )}
@@ -185,16 +197,17 @@ function ArticleRes({ user, comment, post, handleDelete }) {
   );
 }
 export default function Content() {
-  const postID = window.location.hash.toString().slice(10);
+  const postID = window.location.pathname.toString().split("/").pop();
   const [post, setPost] = useState([]);
   const [msg, setMsg] = useState("");
   const [apierror, setApiError] = useState("");
   const { user, setUser } = useContext(AuthContext);
+  const BASE_URL = "https://blogdemo-api.herokuapp.com";
   const navigate = useNavigate();
   // const Bucket = post.find((post) => post.id === Number(postID));
   useEffect(() => {
-    window.scrollTo(0, 0);
-    getAPost(postID).then((data) => setPost(data));
+    // window.scrollTo(0, 0);
+    getPost(postID).then((data) => setPost(data));
     getMe().then((response) => {
       if (response.ok !== 1) {
         setAuthToken(null);
@@ -211,6 +224,7 @@ export default function Content() {
   const handlesendres = (e) => {
     const editAt = new Date().getTime().toString();
     const token = getAuthToken(AuthContext);
+
     const maxcmid = () => {
       if (post.comments.length > 0) {
         return Number(Math.max(...post.comments.map((p) => p.cmid)) + 1);
@@ -224,7 +238,7 @@ export default function Content() {
       return;
     }
 
-    return fetch(`https://student-json-api.lidemy.me/posts/${postID}`, {
+    return fetch(`${BASE_URL}/posts/${postID}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
@@ -246,7 +260,7 @@ export default function Content() {
       .then(() => {
         setMsg("");
         setApiError(null);
-        getAPost(postID).then((data) => setPost(data));
+        getPost(postID).then((data) => setPost(data));
       })
       .catch((err) => {
         setApiError(err.message);
@@ -260,7 +274,7 @@ export default function Content() {
     );
 
     e.preventDefault();
-    return fetch(`https://student-json-api.lidemy.me/posts/${postID}`, {
+    return fetch(`${BASE_URL}/posts/${postID}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
@@ -273,7 +287,7 @@ export default function Content() {
       .then(() => {
         setMsg("");
         setApiError(null);
-        getAPost(postID).then((data) => setPost(data));
+        getPost(postID).then((data) => setPost(data));
       })
       .catch((err) => {
         setApiError(err.message);
@@ -285,26 +299,29 @@ export default function Content() {
       {post && (
         <>
           <CtWrap>
-            <CtTitle>{post.title}</CtTitle>
-            <CtAuthor>
-              作者：
+            <ArthurLink to={`/my`}>
+              <Avatar src={`https://i.pravatar.cc/48?img=${post.id}`} />
+            </ArthurLink>
+
+            <CtAuthor to={`/my`}>
               {post.nickname && post.nickname ? post.nickname : "匿名"}
-              <CtDate>
-                <Blank>{" | "}</Blank>
-                {new Date(Number(post.createdAt)).toLocaleString()}
-              </CtDate>
-              <Divider></Divider>
             </CtAuthor>
+
+            <CtDate>{new Date(Number(post.createdAt)).toLocaleString()}</CtDate>
+
+            <CtTitle>{post.title}</CtTitle>
+            <Pic src={`https://picsum.photos/500/300/?random=${post.id} `} />
             <CtBody>{post.body}</CtBody>
-            {user && user.id === post.userId && (
-              <ResButton onClick={handleEdit}>編輯</ResButton>
-            )}
+
             {post.editAt && (
               <EdDate>
                 最後編輯時間：
                 <br />
                 {new Date(Number(post.editAt)).toLocaleString()}
               </EdDate>
+            )}
+            {user && user.id === post.userId && (
+              <EditButton onClick={handleEdit}>編輯</EditButton>
             )}
           </CtWrap>
           {post && user ? (

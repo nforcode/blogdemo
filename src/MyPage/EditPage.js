@@ -9,7 +9,7 @@ const EditContainer = styled.form`
   background: black;
   color: white;
   padding: 2rem;
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 767px) {
     margin-top: 50px;
     padding: 2rem 0;
     background: gray;
@@ -21,7 +21,7 @@ const EditWrap = styled.div`
   padding: 0 5rem;
   letter-spacing: 0.2rem;
   border: 1rem solid rgba(255, 255, 255, 0.3);
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 767px) {
     margin: 0 2rem;
     padding: 0;
     background: white;
@@ -34,7 +34,7 @@ const EditTitle = styled.input`
   margin: 5rem auto;
   margin-bottom: 5px;
   width: 278px;
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 767px) {
     margin: 2rem;
     width: 80%;
     height: 2rem;
@@ -45,7 +45,7 @@ const EditAuthor = styled.div`
   display: inline;
   margin-top: 1rem;
   font-size: 0.9rem;
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 767px) {
     display: block;
     margin-left: 2rem;
   }
@@ -53,7 +53,7 @@ const EditAuthor = styled.div`
 
 const EditDate = styled.div`
   display: inline;
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 767px) {
     display: block;
     margin-top: 1rem;
   }
@@ -61,7 +61,7 @@ const EditDate = styled.div`
 const Divider = styled.div`
   border-top: 0.2rem solid rgba(255, 255, 255, 0.3);
   margin: 2rem 0;
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 767px) {
     margin-right: 2rem;
     border-top: 0.2rem solid gray;
   }
@@ -71,7 +71,7 @@ const EditBody = styled.textarea`
   margin: 0 auto;
   resize: none;
   width: 280px;
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 767px) {
     margin: 2rem;
     width: 80%;
     font-size: 2rem;
@@ -81,7 +81,7 @@ const SubmitButton = styled.button`
   display: block;
   width: 3rem;
   margin: 1rem auto;
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 767px) {
     margin-top: 2rem;
     margin-bottom: 2rem;
     width: 4rem;
@@ -94,7 +94,7 @@ const CancelButton = styled.button`
   display: block;
   width: 3rem;
   margin: 1rem auto;
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 767px) {
     margin-top: 2rem;
     margin-bottom: 2rem;
     width: 4rem;
@@ -113,7 +113,7 @@ export default function EditPage() {
   const [body, setBody] = useState("");
   const [apierror, setApiError] = useState("");
   const { user } = useContext(AuthContext);
-  const postID = window.location.hash.toString().slice(8);
+  const postID = window.location.pathname.toString().split("/").pop();
   const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -127,8 +127,9 @@ export default function EditPage() {
       });
     }
   }, [user, postID]);
-  const handleEdit = () => {
+  const handleEdit = (e) => {
     const editAt = new Date().getTime().toString();
+    e.preventDefault();
     editPost(user.id, postID, title, body, post.createdAt, editAt)
       .then(() => {
         alert("修改成功");

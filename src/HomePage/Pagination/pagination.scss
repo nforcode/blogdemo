@@ -3,11 +3,11 @@
   list-style-type: none;
 
   .pagination-item {
-    padding: 0 12px;
+    padding: 0 6px;
     height: 32px;
     text-align: center;
     margin: 30px 4px;
-    color: rgba(255,255, 255, 0.87);
+    color: rgba(0,0, 0, 0.87);
     display: flex;
     box-sizing: border-box;
     align-items: center;
@@ -17,8 +17,8 @@
     font-size: 1rem;
     min-width: 32px;
     @media screen and (max-width: 992px) {
-      font-size: 2rem;
 
+      font-size: 1.8rem;
       margin-left: auto;
       margin-right: auto;
     }
@@ -28,12 +28,12 @@
       cursor: default;
     }
     &:hover {
-      background-color: rgba(255, 255, 255, 0.04);
+      background-color: rgba(0, 0, 0, 0.04);
       cursor: pointer;
     }
 
     &.selected {
-      background-color: rgba(255, 255, 255, 0.08);
+      background-color: rgba(0, 0, 0, 0.08);
     }
 
     .arrow {
@@ -45,8 +45,8 @@
         display: inline-block;
         width: 0.4em;
         height: 0.4em;
-        border-right: 0.12em solid rgba(255, 255, 255, 0.87);
-        border-top: 0.12em solid rgba(255, 255, 255, 0.87);
+        border-right: 0.12em solid rgba(0, 0, 0, 0.87);
+        border-top: 0.12em solid rgba(0, 0, 0, 0.87);
       }
 
       &.left {
@@ -62,8 +62,8 @@
       pointer-events: none;
 
       .arrow::before {
-        border-right: 0.12em solid rgba(255, 255, 255, 0.43);
-        border-top: 0.12em solid rgba(255, 255, 255, 0.43);
+        border-right: 0.12em solid rgba(0, 0, 0, 0.43);
+        border-top: 0.12em solid rgba(0, 0, 0, 0.43);
       }
 
       &:hover {

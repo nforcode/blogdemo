@@ -1,14 +1,14 @@
 import { getAuthToken } from "./utils";
 import { AuthContext } from "./contexts";
-const BASE_URL = "https://student-json-api.lidemy.me";
-// const BASE_URL = "https://my-json-server.typicode.com/nforcode/db";
+// const BASE_URL = "https://student-json-api.lidemy.me";
+const BASE_URL = "https://blogdemo-api.herokuapp.com";
 
 export const getPosts = () => {
   return fetch(`${BASE_URL}/posts?_sort=createdAt&_order=desc`).then((res) =>
     res.json()
   );
 };
-export const getAPost = (PostID) => {
+export const getPost = (PostID) => {
   return fetch(`${BASE_URL}/posts/${PostID}`).then((res) => res.json());
 };
 export const newPost = (title, body, nickname) => {
@@ -88,8 +88,14 @@ export const getMe = () => {
   }).then((res) => res.json());
 };
 
+export const arthurPost = (arthurID) => {
+  return fetch(
+    `${BASE_URL}/posts?userId=${arthurID}&_sort=createdAt&_order=desc`
+  ).then((res) => res.json());
+};
+
 export const myPost = (user) => {
   return fetch(
-    `https://student-json-api.lidemy.me/posts?userId=${user.id}&_sort=createdAt&_order=desc`
+    `${BASE_URL}/posts?userId=${user.id}&_sort=createdAt&_order=desc`
   ).then((res) => res.json());
 };
