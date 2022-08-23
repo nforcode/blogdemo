@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { AuthContext } from "../contexts";
 import { arthurPost } from "../WebApi";
 import Post from "../HomePage/Post";
 const MyMainPage = styled.div`
@@ -29,7 +28,6 @@ const MyFooter = styled.div`
 export default function MyPage() {
   const [posts, setPosts] = useState([]);
   const [apiError, setApiError] = useState(null);
-  const { user } = useContext(AuthContext);
   const arthurID = window.location.pathname.toString().split("/").pop();
 
   useEffect(() => {
