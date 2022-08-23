@@ -100,12 +100,17 @@ const ButtonWrap = styled.div`
 `;
 const EditButton = styled.button`
   display: block;
+  border: none;
+  border-radius: 10px;
+  margin-right: 10px;
   @media screen and (max-width: 767px) {
     display: none;
   }
 `;
 const DelButton = styled.button`
   display: block;
+  border: none;
+  border-radius: 10px;
 `;
 const MyErrorMessage = styled.div`
   text-align: center;
