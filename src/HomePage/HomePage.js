@@ -14,7 +14,9 @@ const MainPage = styled.div`
     width: auto;
   }
 `;
-
+const Footer = styled.div`
+  height: 20px;
+`;
 let PageSize = 10;
 
 export default function HomePage() {
@@ -41,6 +43,7 @@ export default function HomePage() {
         pageSize={PageSize}
         onPageChange={(page) => setCurrentPage(page)}
       />
+      <Footer />
     </MainPage>
   );
 }
