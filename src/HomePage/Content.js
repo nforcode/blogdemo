@@ -53,7 +53,7 @@ const CtDate = styled.span`
   position: absolute;
   top: 30px;
   left: 60px;
-  font-size: 14px;
+  font-size: 0.7rem;
   color: grey;
 
   @media screen and (max-width: 767px) {
@@ -63,11 +63,12 @@ const CtDate = styled.span`
 
 const CtTitle = styled.div`
   padding-top: 80px;
-  font-size: 40px;
+  font-size: 2.5rem;
   line-height: 3rem;
 
   @media screen and (max-width: 767px) {
     margin: 0 15px;
+    font-size: 2rem;
   }
 `;
 const Pic = styled.img`
@@ -78,6 +79,7 @@ const Pic = styled.img`
 const CtBody = styled.div`
   margin: 90px 0;
   font-size: 1.2rem;
+  letter-spacing: 0.2rem;
   line-height: 1.8rem;
   word-wrap: break-word;
   @media screen and (max-width: 767px) {
@@ -87,7 +89,7 @@ const CtBody = styled.div`
 
 const EdDate = styled.span`
   display: inline-block;
-  font-size: 14px;
+  font-size: 0.7rem;
   color: grey;
   margin-left: 20px;
 `;
@@ -141,13 +143,15 @@ const ArticleContainer = styled.div`
 const ResWrap = styled.div`
   margin: 10px auto;
   position: relative;
+  min-height: 80px;
   width: 692px;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid #e0e0e0;
   @media screen and (max-width: 767px) {
     width: auto;
     max-width: 600px;
   }
 `;
+const ResArthurLink = styled(Link)``;
 const ResAvatar = styled.img`
   height: 32px;
   width: 32px;
@@ -156,22 +160,25 @@ const ResAvatar = styled.img`
   @media screen and (max-width: 767px) {
   }
 `;
-const ResAuthor = styled.div`
-  margin-left: 36px;
+const ResAuthor = styled(Link)`
+  position: absolute;
+  top: 0px;
+  left: 36px;
   font-size: 0.9rem;
+  color: black;
+  text-decoration: none;
   @media screen and (max-width: 767px) {
   }
 `;
 const ResDate = styled.div`
-  position: absolute;
-  top: 15px;
+  color: grey;
 `;
 const ResBody = styled.div`
-  margin: 30px 0;
-
-  font-size: 1.2rem;
+  padding-top: 35px;
+  padding-bottom: 10px;
   line-height: 1.8rem;
   word-wrap: break-word;
+
   @media screen and (max-width: 767px) {
   }
 `;
@@ -186,8 +193,10 @@ const DelButton = styled.button`
 function ArticleRes({ user, comment, post, handleDelete }) {
   return (
     <ResWrap>
-      <ResAvatar src={`https://i.pravatar.cc/32?img=${comment.cmid}`} />
-      <ResAuthor>
+      <ResArthurLink to={`/user/${post.userId}`}>
+        <ResAvatar src={`https://i.pravatar.cc/32?img=${comment.cmid}`} />
+      </ResArthurLink>
+      <ResAuthor to={`/user/${post.userId}`}>
         {comment.cmnickname && comment.cmnickname ? comment.cmnickname : "匿名"}
         <ResDate>{new Date(Number(comment.cmAt)).toLocaleString()}</ResDate>
       </ResAuthor>
@@ -216,12 +225,16 @@ export default function Content() {
   useEffect(() => {
     // window.scrollTo(0, 0);
     getPost(postID).then((data) => setPost(data));
-    getMe().then((response) => {
-      if (response.ok !== 1) {
-        setAuthToken(null);
-      }
-      setUser(response.data);
-    });
+    if (getAuthToken() === "null") {
+      setAuthToken(null);
+    } else {
+      getMe().then((response) => {
+        if (response.ok !== 1) {
+          setAuthToken(null);
+        }
+        setUser(response.data);
+      });
+    }
   }, [setUser, postID]);
 
   const handleEdit = () => {
@@ -307,11 +320,11 @@ export default function Content() {
       {post && (
         <>
           <CtWrap>
-            <ArthurLink to={`/my`}>
+            <ArthurLink to={`/user/${post.userId}`}>
               <Avatar src={`https://i.pravatar.cc/48?img=${post.id}`} />
             </ArthurLink>
 
-            <CtAuthor to={`/my`}>
+            <CtAuthor to={`/user/${post.userId}`}>
               {post.nickname && post.nickname ? post.nickname : "匿名"}
             </CtAuthor>
 

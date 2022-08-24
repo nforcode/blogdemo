@@ -51,7 +51,7 @@ const PostBody = styled.textarea`
   margin-top: 20px;
   margin-left: 20px;
   width: 93%;
-  font-size: 1.2rem;
+  font-size: 1rem;
   line-height: 1.8rem;
   word-wrap: break-word;
   resize: none;
@@ -61,23 +61,19 @@ const PostBody = styled.textarea`
   }
 `;
 const SubmitButton = styled.button`
-  display: block;
-  width: 60px;
-  margin: 40px auto;
-  height: 15%;
-  font-size: 1.5rem;
+  margin: 60px auto;
+  padding: 10px 40px;
   border: none;
   border-radius: 10px;
+  font-size: 1.2rem;
+  @media screen and (max-width: 767px) {
+    margin-top: 70px;
+    margin-bottom: 50px;
+    width: 40%;
+    height: 15%;
+  }
 `;
-const CancelButton = styled.button`
-  display: block;
-  width: 60px;
-  margin: 40px auto;
-  height: 15%;
-  font-size: 1.5rem;
-  border: none;
-  border-radius: 10px;
-`;
+
 const NewFooter = styled.div`
   display: flex;
 `;
@@ -134,7 +130,7 @@ export default function NewPage() {
         />
         <NewFooter>
           <SubmitButton>送出</SubmitButton>
-          <CancelButton onClick={handleCancel}>取消</CancelButton>
+          <SubmitButton onClick={handleCancel}>取消</SubmitButton>
         </NewFooter>
         {errorMessage && <Errormsg>{errorMessage}</Errormsg>}
       </NewWrap>

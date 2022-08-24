@@ -11,6 +11,8 @@ const PostContainer = styled.div`
   position: relative;
   height: 100px;
   width: 692px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 40px;
   @media screen and (max-width: 767px) {
     width: auto;
     max-width: 600px;
@@ -54,7 +56,7 @@ const PostBody = styled(Link)`
   text-overflow: ellipsis;
   white-space: nowrap;
   text-decoration: none;
-  font-size: 18px;
+
   @media screen and (max-width: 767px) {
     display: none;
   }
@@ -63,9 +65,9 @@ const PostDate = styled.span`
   max-width: 200px;
   overflow: hidden;
   position: absolute;
-  bottom: 0px;
+  bottom: 20px;
   left: 0px;
-  font-size: 14px;
+  font-size: 0.7rem;
   color: grey;
   /* lg */
   @media screen and (max-width: 767px) {
@@ -75,9 +77,9 @@ const PostReplyNumber = styled(Link)`
   max-width: 200px;
   overflow: hidden;
   position: absolute;
-  bottom: 0px;
+  bottom: 20px;
   left: 90px;
-  font-size: 14px;
+  font-size: 0.7rem;
   color: grey;
   text-decoration: none;
 `;
@@ -95,23 +97,17 @@ const Pic = styled.img`
 const ButtonWrap = styled.div`
   display: flex;
   position: absolute;
-  right: 110px;
-  bottom: -5px;
+  right: -10px;
+  bottom: 10px;
 `;
-const EditButton = styled.button`
+const Button = styled.button`
   display: block;
   border: none;
   border-radius: 10px;
   margin-right: 10px;
-  @media screen and (max-width: 767px) {
-    display: none;
-  }
+  padding: 3px 10px;
 `;
-const DelButton = styled.button`
-  display: block;
-  border: none;
-  border-radius: 10px;
-`;
+
 const MyErrorMessage = styled.div`
   text-align: center;
   margin-top: 20px;
@@ -159,21 +155,21 @@ export default function Post({ post }) {
       </LinkPic>
       {user && arthurID === user.id && user.id === post.userId && (
         <ButtonWrap>
-          <EditButton
+          <Button
             onClick={() => {
               handleEdit(post.id);
             }}
           >
             編輯
-          </EditButton>
+          </Button>
 
-          <DelButton
+          <Button
             onClick={() => {
               handleDelete(post.id);
             }}
           >
             刪除
-          </DelButton>
+          </Button>
         </ButtonWrap>
       )}
       {apiError && (

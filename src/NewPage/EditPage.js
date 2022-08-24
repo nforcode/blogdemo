@@ -54,8 +54,8 @@ const EditBody = styled.textarea`
   margin-top: 20px;
   margin-left: 20px;
   width: 93%;
-  font-size: 1.2rem;
-  line-height: 1.8rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
   word-wrap: break-word;
   resize: none;
   outline: medium;
@@ -64,23 +64,19 @@ const EditBody = styled.textarea`
   }
 `;
 const SubmitButton = styled.button`
-  display: block;
-  width: 60px;
-  margin: 40px auto;
-  height: 15%;
-  font-size: 1.5rem;
+  margin: 60px auto;
+  padding: 10px 40px;
   border: none;
   border-radius: 10px;
+  font-size: 1.2rem;
+  @media screen and (max-width: 767px) {
+    margin-top: 70px;
+    margin-bottom: 50px;
+    width: 40%;
+    height: 15%;
+  }
 `;
-const CancelButton = styled.button`
-  display: block;
-  width: 60px;
-  margin: 40px auto;
-  height: 15%;
-  font-size: 1.5rem;
-  border: none;
-  border-radius: 10px;
-`;
+
 const EditFooter = styled.div`
   display: flex;
 `;
@@ -147,7 +143,7 @@ export default function EditPage() {
 
           <EditFooter>
             <SubmitButton>送出</SubmitButton>
-            <CancelButton onclick={handleCancel}>取消</CancelButton>
+            <SubmitButton onclick={handleCancel}>取消</SubmitButton>
           </EditFooter>
         </EditWrap>
       )}

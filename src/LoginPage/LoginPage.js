@@ -16,48 +16,50 @@ const LoginForm = styled.form`
   }
 `;
 const LoginWrap = styled.div`
-  width: 250px;
-  height: 250px;
+  width: 600px;
+  height: 330px;
   margin: 50px auto;
   display: flex;
   flex-direction: column;
   border: 1px solid grey;
   text-align: center;
+
   @media screen and (max-width: 767px) {
     width: 80%;
     height: 80%;
-    font-size: 2rem;
   }
 `;
 const LoginUsername = styled.div`
-  margin-top: 20px;
+  font-size: 1.2rem;
+  margin-top: 60px;
 `;
 
 const LoginPassword = styled.div`
-  margin-top: 20px;
+  font-size: 1.2rem;
+  margin-top: 60px;
 `;
 const Input = styled.input`
   border: none;
   outline: medium;
   border-bottom: 1px solid gray;
+  font-size: 1.2rem;
+  margin-left: 10px;
+
   @media screen and (max-width: 767px) {
-    margin: 2rem;
     width: 80%;
-    height: 2rem;
-    font-size: 2rem;
   }
 `;
 const LoginButton = styled.button`
-  width: 3rem;
-  margin: 1rem auto;
+  margin: 60px auto;
+  padding: 10px 40px;
   border: none;
   border-radius: 10px;
+  font-size: 1.2rem;
   @media screen and (max-width: 767px) {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 70px;
+    margin-bottom: 50px;
     width: 50%;
     height: 15%;
-    font-size: 1.5rem;
   }
 `;
 const Errormsg = styled.div`
@@ -97,7 +99,7 @@ export default function LoginPage() {
     <LoginForm onSubmit={handleSubmit}>
       <LoginWrap>
         <LoginUsername>
-          username:{" "}
+          username{" "}
           <Input
             placeholder="請輸入帳號"
             maxLength="10"
@@ -106,7 +108,7 @@ export default function LoginPage() {
           />
         </LoginUsername>
         <LoginPassword>
-          password:{" "}
+          password{" "}
           <Input
             placeholder="請輸入密碼"
             maxLength="10"

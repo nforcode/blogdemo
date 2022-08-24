@@ -31,9 +31,9 @@ const Wrap = styled.div`
 `;
 const Logo = styled.h1`
   display: inline;
-  color: #0080ff;
+  color: white;
   margin-left: 15px;
-  font-size: 2.5rem;
+  font-size: 2.4rem;
   font-family: fantasy;
   text-decoration: none;
   position: absolute;
@@ -46,24 +46,22 @@ const MLogo = styled.h1`
   display: none;
   @media screen and (max-width: 767px) {
     display: inline;
-    color: #0080ff;
+    color: white;
     margin-left: 15px;
-    font-size: 2.5rem;
+    font-size: 2.4rem;
     font-family: fantasy;
     text-decoration: none;
     position: absolute;
-    top: 5px;
+    top: 2px;
   }
 `;
 const NavBarList = styled.div`
   display: flex;
   align-items: center;
-  font-size: 1rem;
   position: absolute;
   top: 12px;
   right: -15px;
   @media screen and (max-width: 767px) {
-    font-size: 1.2rem;
     top: 5px;
   }
 `;
@@ -91,7 +89,7 @@ const Nav = styled(Link)`
     props.$active && `background:rgba(255,255,255,0.3); border-radius:10px;`}
 `;
 const Post = styled(Link)`
-  background-color: #64a600;
+  background-color: #0072e3;
   margin-right: 30px;
   padding: 10px 15px;
   border-radius: 5px;

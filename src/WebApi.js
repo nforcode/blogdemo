@@ -11,6 +11,11 @@ export const getPosts = () => {
 export const getPost = (PostID) => {
   return fetch(`${BASE_URL}/posts/${PostID}`).then((res) => res.json());
 };
+export const getUser = () => {
+  return fetch(`https://blogdemo-api.herokuapp.com/users`).then((res) =>
+    res.json()
+  );
+};
 export const newPost = (title, body, nickname) => {
   const token = getAuthToken(AuthContext);
   return fetch(`${BASE_URL}/posts`, {
