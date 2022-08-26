@@ -29,15 +29,11 @@ const LoginWrap = styled.div`
     height: 80%;
   }
 `;
-const LoginUsername = styled.div`
+const LoginLabel = styled.span`
   font-size: 1.2rem;
   margin-top: 60px;
 `;
 
-const LoginPassword = styled.div`
-  font-size: 1.2rem;
-  margin-top: 60px;
-`;
 const Input = styled.input`
   border: none;
   outline: medium;
@@ -98,7 +94,7 @@ export default function LoginPage() {
   return (
     <LoginForm onSubmit={handleSubmit}>
       <LoginWrap>
-        <LoginUsername>
+        <LoginLabel>
           username{" "}
           <Input
             placeholder="請輸入帳號"
@@ -106,8 +102,8 @@ export default function LoginPage() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-        </LoginUsername>
-        <LoginPassword>
+        </LoginLabel>
+        <LoginLabel>
           password{" "}
           <Input
             placeholder="請輸入密碼"
@@ -116,7 +112,7 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </LoginPassword>
+        </LoginLabel>
         <LoginButton>登入</LoginButton>
         {errorMessage && <Errormsg>{errorMessage}</Errormsg>}
       </LoginWrap>

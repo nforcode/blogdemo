@@ -8,57 +8,52 @@ const RegForm = styled.form`
   padding: 0 15px;
   width: 840px;
   height: 100%;
-  color: black;
   margin: 0 auto;
+  color: black;
   @media screen and (max-width: 767px) {
     width: auto;
   }
 `;
 const RegWrap = styled.div`
-  width: 250px;
-  height: 250px;
+  width: 600px;
+  height: 420px;
   margin: 50px auto;
   display: flex;
   flex-direction: column;
-  text-align: center;
   border: 1px solid grey;
+  text-align: center;
+
   @media screen and (max-width: 767px) {
-    margin: 20px auto;
     width: 80%;
     height: 80%;
-    font-size: 2rem;
   }
 `;
-const RegUsername = styled.div`
-  margin-top: 20px;
-`;
-const RegNickname = styled.div`
-  margin-top: 20px;
-`;
-const RegPassword = styled.div`
-  margin-top: 20px;
+const RegLabel = styled.span`
+  font-size: 1.2rem;
+  margin-top: 60px;
 `;
 const Input = styled.input`
   border: none;
   outline: medium;
   border-bottom: 1px solid gray;
+  font-size: 1.2rem;
+  margin-left: 10px;
+
   @media screen and (max-width: 767px) {
-    margin: 20px;
     width: 80%;
-    font-size: 1.5rem;
   }
 `;
 const RegButton = styled.button`
-  width: 60px;
-  margin: 20px auto;
+  margin: 60px auto;
+  padding: 10px 40px;
   border: none;
   border-radius: 10px;
+  font-size: 1.2rem;
   @media screen and (max-width: 767px) {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 70px;
+    margin-bottom: 50px;
     width: 50%;
     height: 15%;
-    font-size: 1.5rem;
   }
 `;
 const Errormsg = styled.div`
@@ -100,26 +95,26 @@ export default function RegPage() {
   return (
     <RegForm onSubmit={handleSubmit}>
       <RegWrap>
-        <RegUsername>
-          username:{" "}
+        <RegLabel>
+          username{" "}
           <Input
             placeholder="請輸入帳號(10字以內)"
             maxLength="10"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-        </RegUsername>
-        <RegNickname>
-          nickname:{" "}
+        </RegLabel>
+        <RegLabel>
+          nickname{" "}
           <Input
             placeholder="請輸入暱稱(10字以內)"
             maxLength="10"
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
           />
-        </RegNickname>
-        <RegPassword>
-          password:{" "}
+        </RegLabel>
+        <RegLabel>
+          password{" "}
           <Input
             placeholder="請輸入密碼(10字以內)"
             maxLength="10"
@@ -127,7 +122,7 @@ export default function RegPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </RegPassword>
+        </RegLabel>
         <RegButton>註冊</RegButton>
         {errorMessage && <Errormsg>{errorMessage}</Errormsg>}
       </RegWrap>
