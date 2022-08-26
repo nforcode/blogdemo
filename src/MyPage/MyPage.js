@@ -45,7 +45,7 @@ export default function MyPage() {
       .catch((err) => {
         setApiError(err.message);
       });
-  }, [arthurID, posts]);
+  }, [arthurID]);
   return (
     <MyMainPage>
       {posts &&
