@@ -4,6 +4,10 @@ import { getPosts, getUser } from "../WebApi";
 import { Link } from "react-router-dom";
 import Pagination from "./Pagination/Pagination";
 import Post from "./Post";
+const WrapOut = styled.div`
+  height: calc(100vh - 60px);
+  overflow-y: scroll;
+`;
 const MainPage = styled.div`
   padding: 0 15px;
   width: 840px;
@@ -98,22 +102,24 @@ export default function HomePage() {
   }, []);
 
   return (
-    <MainPage>
-      {posts &&
-        currentTableData.map((post) => <Post post={post} key={post.id} />)}
-      <Recommend>
-        <P>推薦作者</P>
-        {arthurs &&
-          arthurs.map((user) => <RandomUser user={user}></RandomUser>)}
-      </Recommend>
-      <Pagination
-        className="pagination-bar"
-        currentPage={currentPage}
-        totalCount={posts.length}
-        pageSize={PageSize}
-        onPageChange={(page) => setCurrentPage(page)}
-      />
-      <Footer />
-    </MainPage>
+    <WrapOut>
+      <MainPage>
+        {posts &&
+          currentTableData.map((post) => <Post post={post} key={post.id} />)}
+        <Recommend>
+          <P>推薦作者</P>
+          {arthurs &&
+            arthurs.map((user) => <RandomUser user={user}></RandomUser>)}
+        </Recommend>
+        <Pagination
+          className="pagination-bar"
+          currentPage={currentPage}
+          totalCount={posts.length}
+          pageSize={PageSize}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
+        <Footer />
+      </MainPage>
+    </WrapOut>
   );
 }

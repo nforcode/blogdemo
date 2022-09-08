@@ -5,6 +5,11 @@ import { AuthContext } from "../contexts";
 import { setAuthToken, getAuthToken } from "../utils";
 import { getPost, getMe } from "../WebApi";
 import { useNavigate, Link } from "react-router-dom";
+
+const WrapOut = styled.div`
+  height: calc(100vh - 60px);
+  overflow-y: scroll;
+`;
 const CtContainer = styled.div`
   padding: 0 15px;
   width: 840px;
@@ -316,74 +321,78 @@ export default function Content() {
   };
 
   return (
-    <CtContainer>
-      {post && (
-        <>
-          <CtWrap>
-            <ArthurLink to={`/user/${post.userId}`}>
-              <Avatar src={`https://i.pravatar.cc/48?img=${post.id}`} />
-            </ArthurLink>
+    <WrapOut>
+      <CtContainer>
+        {post && (
+          <>
+            <CtWrap>
+              <ArthurLink to={`/user/${post.userId}`}>
+                <Avatar src={`https://i.pravatar.cc/48?img=${post.id}`} />
+              </ArthurLink>
 
-            <CtAuthor to={`/user/${post.userId}`}>
-              {post.nickname && post.nickname ? post.nickname : "匿名"}
-            </CtAuthor>
+              <CtAuthor to={`/user/${post.userId}`}>
+                {post.nickname && post.nickname ? post.nickname : "匿名"}
+              </CtAuthor>
 
-            <CtDate>{new Date(Number(post.createdAt)).toLocaleString()}</CtDate>
+              <CtDate>
+                {new Date(Number(post.createdAt)).toLocaleString()}
+              </CtDate>
 
-            <CtTitle>{post.title}</CtTitle>
-            <Pic src={`https://picsum.photos/500/300/?random=${post.id} `} />
-            <CtBody>{post.body}</CtBody>
+              <CtTitle>{post.title}</CtTitle>
+              <Pic src={`https://picsum.photos/500/300/?random=${post.id} `} />
+              <CtBody>{post.body}</CtBody>
 
-            {post.editAt && (
-              <EdDate>
-                最後編輯時間：
-                <br />
-                {new Date(Number(post.editAt)).toLocaleString()}
-              </EdDate>
+              {post.editAt && (
+                <EdDate>
+                  最後編輯時間：
+                  <br />
+                  {new Date(Number(post.editAt)).toLocaleString()}
+                </EdDate>
+              )}
+              {user && user.id === post.userId && (
+                <EditButton onClick={handleEdit}>編輯</EditButton>
+              )}
+            </CtWrap>
+            {post && user ? (
+              <ResponseForm onSubmit={handlesendres}>
+                {/* <ResAuthor>{user.nickname}</ResAuthor> */}
+                <ResMsg
+                  rows={5}
+                  placeholder="請輸入內文(100字內)"
+                  maxLength="100"
+                  value={msg}
+                  onChange={(e) => setMsg(e.target.value)}
+                ></ResMsg>
+                <ResButton>送出</ResButton>
+                {apierror && <alert>{apierror.toString()}</alert>}
+              </ResponseForm>
+            ) : (
+              <ResponseForm>
+                {/* <ResAuthor>{user.nickname}</ResAuthor> */}
+                <ResMsg
+                  rows={5}
+                  placeholder="欲留言請先登入"
+                  maxLength="100"
+                ></ResMsg>
+                <Resnologin> 您尚未登入</Resnologin>
+              </ResponseForm>
             )}
-            {user && user.id === post.userId && (
-              <EditButton onClick={handleEdit}>編輯</EditButton>
-            )}
-          </CtWrap>
-          {post && user ? (
-            <ResponseForm onSubmit={handlesendres}>
-              {/* <ResAuthor>{user.nickname}</ResAuthor> */}
-              <ResMsg
-                rows={5}
-                placeholder="請輸入內文(100字內)"
-                maxLength="100"
-                value={msg}
-                onChange={(e) => setMsg(e.target.value)}
-              ></ResMsg>
-              <ResButton>送出</ResButton>
-              {apierror && <alert>{apierror.toString()}</alert>}
-            </ResponseForm>
-          ) : (
-            <ResponseForm>
-              {/* <ResAuthor>{user.nickname}</ResAuthor> */}
-              <ResMsg
-                rows={5}
-                placeholder="欲留言請先登入"
-                maxLength="100"
-              ></ResMsg>
-              <Resnologin> 您尚未登入</Resnologin>
-            </ResponseForm>
-          )}
-          <ArticleContainer>
-            {post.comments &&
-              post.comments.map((comment) => (
-                <ArticleRes
-                  comment={comment}
-                  handleDelete={handleDelete}
-                  user={user}
-                  post={post}
-                  key={comment.cmid}
-                />
-              ))}
-          </ArticleContainer>
-        </>
-      )}
-    </CtContainer>
+            <ArticleContainer>
+              {post.comments &&
+                post.comments.map((comment) => (
+                  <ArticleRes
+                    comment={comment}
+                    handleDelete={handleDelete}
+                    user={user}
+                    post={post}
+                    key={comment.cmid}
+                  />
+                ))}
+            </ArticleContainer>
+          </>
+        )}
+      </CtContainer>
+    </WrapOut>
   );
 }
 

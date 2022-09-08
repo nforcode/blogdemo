@@ -25,6 +25,7 @@ const Wrap = styled.div`
   height: 100%;
   margin: 0 auto;
   position: relative;
+
   @media screen and (max-width: 767px) {
     width: auto;
   }
