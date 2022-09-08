@@ -74,7 +74,7 @@ const NavIndex = styled(Link)`
   color: white;
   text-decoration: none;
   ${(props) =>
-    props.$active && `background:rgba(255,255,255,0.3); border-radius:10px;`}
+    props.$active && `background:rgba(255,255,255,0.3); border-radius:5px;`}
   @media screen and (max-width: 767px) {
     display: none;
   }
@@ -87,7 +87,7 @@ const Nav = styled(Link)`
   color: white;
   text-decoration: none;
   ${(props) =>
-    props.$active && `background:rgba(255,255,255,0.3); border-radius:10px;`}
+    props.$active && `background:rgba(255,255,255,0.3); border-radius:5px;`}
 `;
 const Post = styled(Link)`
   background-color: #0072e3;
