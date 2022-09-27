@@ -103,7 +103,7 @@ export default function NewPage() {
       if (data.ok === 0) {
         return setErrorMessage(data.message);
       }
-      navigate("user/:id");
+      navigate(`/user/${user.id}`);
     });
   };
 
