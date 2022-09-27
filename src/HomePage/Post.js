@@ -114,7 +114,7 @@ const MyErrorMessage = styled.div`
   color: red;
 `;
 export default function Post({ post }) {
-  const [setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [apiError, setApiError] = useState(null);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
