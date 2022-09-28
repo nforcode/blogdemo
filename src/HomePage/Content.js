@@ -198,10 +198,10 @@ const DelButton = styled.button`
 function ArticleRes({ user, comment, post, handleDelete }) {
   return (
     <ResWrap>
-      <ResArthurLink to={`/user/${post.userId}`}>
+      <ResArthurLink to={`/user/${comment.cmuserid}`}>
         <ResAvatar src={`https://i.pravatar.cc/32?img=${comment.cmid}`} />
       </ResArthurLink>
-      <ResAuthor to={`/user/${post.userId}`}>
+      <ResAuthor to={`/user/${comment.cmuserid}`}>
         {comment.cmnickname && comment.cmnickname ? comment.cmnickname : "匿名"}
         <ResDate>{new Date(Number(comment.cmAt)).toLocaleString()}</ResDate>
       </ResAuthor>

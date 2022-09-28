@@ -2,13 +2,13 @@
 @serverUrl= https://blogdemo-api.herokuapp.com
 
 
-### 留言板 ###
-POST {{serverUrl}}/comments
+### login ###
+POST {{serverUrl}}/login
 content-type: application/json
 
 {
-    "nickname": "hello",
-    "body": "comment content"
+    "id": "SUSER",
+    "password": ""
 }
 
 ### 驗證身分 ###
