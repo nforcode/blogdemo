@@ -109,7 +109,7 @@ export default function EditPage() {
         alert("修改成功");
         myPost(user);
         setApiError(null);
-        navigate("/my");
+        navigate(`/user/${user.id}`);
       })
       .catch((err) => {
         setApiError(err.message);
@@ -117,7 +117,7 @@ export default function EditPage() {
   };
 
   const handleCancel = () => {
-    navigate("/my");
+    navigate(`/user/${user.id}`);
   };
 
   return (
