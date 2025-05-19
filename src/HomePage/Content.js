@@ -224,7 +224,7 @@ export default function Content() {
   const [msg, setMsg] = useState("");
   const [apierror, setApiError] = useState("");
   const { user, setUser } = useContext(AuthContext);
-  const BASE_URL = "https://blogdemo-api.herokuapp.com";
+  const BASE_URL = "https://blogdemo-api.onrender.com";
   const navigate = useNavigate();
   // const Bucket = post.find((post) => post.id === Number(postID));
   useEffect(() => {
