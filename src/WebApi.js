@@ -1,7 +1,8 @@
 import { getAuthToken } from "./utils";
 import { AuthContext } from "./contexts";
 // const BASE_URL = "https://student-json-api.lidemy.me";
-const BASE_URL = "https://blogdemo-api.herokuapp.com";
+// const BASE_URL = "https://blogdemo-api.herokuapp.com";
+const BASE_URL = "https://blogdemo-api.onrender.com/";
 
 export const getPosts = () => {
   return fetch(`${BASE_URL}/posts?_sort=createdAt&_order=desc`).then((res) =>
@@ -12,7 +13,7 @@ export const getPost = (PostID) => {
   return fetch(`${BASE_URL}/posts/${PostID}`).then((res) => res.json());
 };
 export const getUser = () => {
-  return fetch(`https://blogdemo-api.herokuapp.com/users`).then((res) =>
+  return fetch(`https://blogdemo-api.onrender.com/users`).then((res) =>
     res.json()
   );
 };
