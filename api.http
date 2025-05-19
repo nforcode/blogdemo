@@ -1,6 +1,6 @@
 # @serverUrl = https://student-json-api.lidemy.me
 # @serverUrl= https://blogdemo-api.herokuapp.com
-@serverUrl= http://localhost:3001
+@serverUrl= https://blogdemo-api.onrender.com/
 
 ### login ###
 POST {{serverUrl}}/login
